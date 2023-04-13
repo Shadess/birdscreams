@@ -1,6 +1,6 @@
 import type { Component } from 'solid-js';
 
-import logo from './logo.svg';
+import logo from './assets/birdscream.gif';
 import styles from './App.module.css';
 
 const App: Component = () => {
@@ -8,15 +8,7 @@ const App: Component = () => {
     <div class={styles.App}>
       <header class={styles.header}>
         <img src={logo} class={styles.logo} alt="logo" />
-        <p>Birdscreams</p>
-        <a
-          class={styles.link}
-          href="https://github.com/solidjs/solid"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Solid
-        </a>
+        <p class={styles.title}>Birdscreams</p>
       </header>
     </div>
   );
