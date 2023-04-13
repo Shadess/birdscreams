@@ -1,8 +1,9 @@
 {
   "name": "app",
   "scripts": {
-    "dev": "solid-start dev",
     "build": "solid-start build",
+    "deploy": "firebase deploy",
+    "dev": "solid-start dev",
     "start": "solid-start start"
   },
   "type": "module",
