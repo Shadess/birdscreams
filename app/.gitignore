@@ -8,6 +8,7 @@ netlify
 # dependencies
 /node_modules
 .firebase
+.firebase/
 test-results/
 
 # IDEs and editors
