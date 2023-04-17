@@ -15,6 +15,7 @@ web-build/
 
 # build files
 *.tsbuildinfo
+public/
 
 .firebase
 GoogleService-Info.*.plist
