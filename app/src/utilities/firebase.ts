@@ -4,6 +4,7 @@ import {
   User,
   createUserWithEmailAndPassword,
   getAuth,
+  signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
 
@@ -31,6 +32,15 @@ export class Firebase {
   static async createUser(email: string, password: string) {
     try {
       await createUserWithEmailAndPassword(Firebase.auth, email, password);
+      return null;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  static async signIn(email: string, password: string) {
+    try {
+      await signInWithEmailAndPassword(Firebase.auth, email, password);
       return null;
     } catch (error) {
       return error;

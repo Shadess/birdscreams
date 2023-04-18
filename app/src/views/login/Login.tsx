@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import logo from '../../assets/birdscreams.gif';
-import SignUp from './components/SignUp';
+import LoginForm from './components/LoginForm';
 
 function Login() {
   return (
@@ -12,7 +12,7 @@ function Login() {
           alt="logo"
         />
 
-        <SignUp />
+        <LoginForm />
       </header>
     </div>
   );
