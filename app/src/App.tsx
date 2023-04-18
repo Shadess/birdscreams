@@ -1,25 +1,33 @@
-import logo from './assets/birdscreams.gif';
+import { User, onAuthStateChanged } from 'firebase/auth';
+import { useEffect, useState } from 'react';
+import { UserContext } from './contexts/user.context';
+import BirdRouter from './router/BirdRouter';
+import { Firebase } from './utilities/firebase';
+
+Firebase.init();
 
 function App() {
+  const [firebaseUser, setFirebaseUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const onFirebaseAuthLoaded = new Promise((resolve) => {
+      onAuthStateChanged(Firebase.auth, (newFirebaseUser) => {
+        setFirebaseUser(newFirebaseUser);
+        resolve(newFirebaseUser);
+      });
+    });
+
+    const prepare = async () => {
+      await onFirebaseAuthLoaded;
+    };
+
+    prepare();
+  }, []);
+
   return (
-    <div className="text-center">
-      <header className="bg-slate-500 flex flex-col items-center justify-center min-h-screen text-white">
-        <img
-          src={logo}
-          className="animate-[spin_20s_linear_infinite] rounded-full text-xl w-60 z-10"
-          alt="logo"
-        />
-        <p
-          className="mt-2 text-2xl z-20"
-          style={{
-            textShadow:
-              '-1px 1px 0 #282c34, 1px 1px 0 #282c34, 1px -1px 0 #282c34',
-          }}
-        >
-          Birdscreams
-        </p>
-      </header>
-    </div>
+    <UserContext.Provider value={firebaseUser}>
+      <BirdRouter />
+    </UserContext.Provider>
   );
 }
 

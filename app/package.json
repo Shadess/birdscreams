@@ -8,6 +8,9 @@
     "start": "react-scripts start",
     "test": "react-scripts test"
   },
+  "engines": {
+    "node": "18"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
