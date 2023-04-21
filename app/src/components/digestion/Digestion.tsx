@@ -19,7 +19,9 @@ function Digestion() {
       limit(100),
     );
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      setScreams(querySnapshot.docs.map((doc) => doc.data()));
+      setScreams(
+        querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })),
+      );
     });
 
     return unsubscribe;
@@ -31,7 +33,10 @@ function Digestion() {
       </div>
 
       {screams.map((scream) => (
-        <div className="bg-slate-200 my-4 mx-2 p-4 rounded shadow-xl">
+        <div
+          className="bg-slate-200 my-4 mx-2 p-4 rounded shadow-xl"
+          key={scream.id}
+        >
           <p>{scream.message}</p>
         </div>
       ))}

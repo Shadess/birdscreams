@@ -5,8 +5,6 @@ import UnAuthorizedRoutes from './UnAuthorizedRoutes';
 
 function BirdRouter() {
   const firebaseUser = useContext(UserContext);
-  console.log(firebaseUser);
-
   return firebaseUser ? <AuthorizedRoutes /> : <UnAuthorizedRoutes />;
 }
 
