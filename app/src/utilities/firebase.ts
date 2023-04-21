@@ -7,11 +7,14 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
+import { Firestore, getFirestore } from 'firebase/firestore';
 
 export class Firebase {
   public static app: FirebaseApp;
 
   public static auth: Auth;
+
+  public static db: Firestore;
 
   public static user: User | null;
 
@@ -27,6 +30,7 @@ export class Firebase {
     });
 
     Firebase.auth = getAuth(Firebase.app);
+    Firebase.db = getFirestore(Firebase.app);
   }
 
   static async createUser(email: string, password: string) {
