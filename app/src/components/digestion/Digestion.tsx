@@ -27,11 +27,13 @@ function Digestion() {
   return (
     <>
       <div className="bg-slate-800 p-4">
-        <h1 className="font-bold text-white uppercase">Digestion</h1>
+        <h1 className="font-bold text-white uppercase">cloaca</h1>
       </div>
 
       {screams.map((scream) => (
-        <p>{scream.message}</p>
+        <div className="bg-slate-200 my-4 mx-2 p-4 rounded shadow-xl">
+          <p>{scream.message}</p>
+        </div>
       ))}
     </>
   );
