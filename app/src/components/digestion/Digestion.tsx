@@ -1,6 +1,8 @@
 import {
   DocumentData,
   collection,
+  doc,
+  getDoc,
   limit,
   onSnapshot,
   orderBy,
@@ -18,10 +20,20 @@ function Digestion() {
       orderBy('date', 'desc'),
       limit(100),
     );
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      setScreams(
-        querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })),
+    const unsubscribe = onSnapshot(q, async (querySnapshot) => {
+      const bareScreams = await Promise.all(
+        querySnapshot.docs.map(async (sDoc) => {
+          const userRef = doc(Firebase.db, 'users', sDoc.data().author_uid);
+          const user = (await getDoc(userRef)).data();
+
+          return {
+            ...sDoc.data(),
+            id: sDoc.id,
+            author: user ? user.username : sDoc.data().author_uid,
+          };
+        }),
       );
+      setScreams(bareScreams);
     });
 
     return unsubscribe;
@@ -38,6 +50,7 @@ function Digestion() {
           key={scream.id}
         >
           <p>{scream.message}</p>
+          <p className="mt-1 text-right">{scream.author}</p>
         </div>
       ))}
     </>

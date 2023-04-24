@@ -17,6 +17,7 @@ function Profile() {
 
   const [showUsernameInput, setShowUsernameInput] = useState(false);
   const [user, setUser] = useState<DocumentData | undefined>(undefined);
+  const [userDocExists, setUserDocExists] = useState(false);
   const [userNameInput, setuserNameInput] = useState<string>('');
 
   useEffect(() => {
@@ -28,7 +29,7 @@ function Profile() {
     );
     return sub;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [userDocExists]);
 
   if (!authUser) return null;
 
@@ -60,6 +61,7 @@ function Profile() {
                   username: userNameInput,
                   userId: authUser.uid,
                 });
+                setUserDocExists(true);
               } else {
                 const userDoc = doc(Firebase.db, 'users', authUser.uid);
                 await updateDoc(userDoc, {
